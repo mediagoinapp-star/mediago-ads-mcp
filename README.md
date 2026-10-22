@@ -2,9 +2,9 @@
 
 面向 **MediaGo / AdMaster Android 广告 SDK (`cc.admaster.android:sdk`)** 的官方 Model Context Protocol (MCP) Server。
 
-与仓库中的 [`mediago-ads-skills`](../README_zh.md) 配合使用，采用 **「Skill 定流程 + MCP 供工具/查真源/断日志」** 的双引擎架构（参考腾讯云 TRTC MCP 设计范式）：
+与官方 Skill 仓库 [`mediago-ads-skills`](https://github.com/mediagoinapp-star/mediago-ads-skills) 配合使用，采用 **「Skill 定流程 + MCP 供工具/查真源/断日志」** 的双引擎架构（参考腾讯云 TRTC MCP 设计范式）：
 - **零外部依赖**：基于原生 Node.js (`>=18`) 实现标准 JSON-RPC 2.0 `stdio` 协议，无需 `npm install` 任何第三方包即可直接运行。
-- **单一事实源**：直接读取 [`compatibility/compatibility.json`](../compatibility/compatibility.json) 与 SDK 源码级状态机定义，彻底杜绝大模型编造版本号、写错包名或混淆聚合参数键名。
+- **单一事实源**：直接读取内置 [`data/compatibility.json`](./data/compatibility.json) 与 SDK 源码级状态机定义，彻底杜绝大模型编造版本号、写错包名或混淆聚合参数键名。
 
 ---
 
@@ -65,7 +65,7 @@ claude mcp add mediago-ads-mcp -- npx -y github:mediagoinapp-star/mediago-ads-mc
     "mediago_ads": {
       "command": "node",
       "args": [
-        "/abs/path/to/mediago-ads-skills/mcp/bin/mediago-ads-mcp.js"
+        "/abs/path/to/mediago-ads-mcp/bin/mediago-ads-mcp.js"
       ]
     }
   }

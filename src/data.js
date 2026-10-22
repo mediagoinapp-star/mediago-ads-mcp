@@ -6,8 +6,8 @@ const path = require('path');
 function resolveCompatibilityPath() {
   const candidates = [
     process.env.MEDIAGO_COMPATIBILITY_JSON_PATH,
-    path.resolve(__dirname, '../../compatibility/compatibility.json'),
-    path.resolve(__dirname, '../data/compatibility.json')
+    path.resolve(__dirname, '../data/compatibility.json'),
+    path.resolve(__dirname, '../../mediago-ads-skills/compatibility/compatibility.json')
   ].filter(Boolean);
 
   for (const p of candidates) {

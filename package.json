@@ -14,7 +14,8 @@
     "ROADMAP.md"
   ],
   "scripts": {
-    "prepack": "node -e \"const fs=require('fs'),p=require('path'),src=p.resolve(__dirname,'../compatibility/compatibility.json'),dst=p.resolve(__dirname,'data/compatibility.json');if(fs.existsSync(src)){fs.mkdirSync(p.dirname(dst),{recursive:true});fs.copyFileSync(src,dst);}\"",
+    "sync-compat": "node -e \"const fs=require('fs'),p=require('path'),src=p.resolve(__dirname,'../mediago-ads-skills/compatibility/compatibility.json'),dst=p.resolve(__dirname,'data/compatibility.json');if(fs.existsSync(src)){fs.mkdirSync(p.dirname(dst),{recursive:true});fs.copyFileSync(src,dst);console.log('Synced compatibility.json from ../mediago-ads-skills');}\"",
+    "prepack": "npm run sync-compat",
     "start": "node ./bin/mediago-ads-mcp.js",
     "test": "node ./test/test-mcp.js"
   },
