@@ -1,0 +1,44 @@
+{
+  "name": "@mediago/ads-mcp",
+  "version": "1.0.0",
+  "description": "Official Model Context Protocol (MCP) Server for MediaGo / AdMaster Android & Unity SDK integration, mediation configuration, error code diagnosis, and Logcat trace analysis.",
+  "main": "src/server.js",
+  "bin": {
+    "mediago-ads-mcp": "./bin/mediago-ads-mcp.js"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "data/",
+    "README.md",
+    "ROADMAP.md"
+  ],
+  "scripts": {
+    "prepack": "node -e \"const fs=require('fs'),p=require('path'),src=p.resolve(__dirname,'../compatibility/compatibility.json'),dst=p.resolve(__dirname,'data/compatibility.json');if(fs.existsSync(src)){fs.mkdirSync(p.dirname(dst),{recursive:true});fs.copyFileSync(src,dst);}\"",
+    "start": "node ./bin/mediago-ads-mcp.js",
+    "test": "node ./test/test-mcp.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mediagoinapp-star/mediago-ads-mcp.git"
+  },
+  "homepage": "https://github.com/mediagoinapp-star/mediago-ads-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/mediagoinapp-star/mediago-ads-mcp/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mediago",
+    "admaster",
+    "android-sdk",
+    "ads"
+  ],
+  "license": "Apache-2.0"
+}

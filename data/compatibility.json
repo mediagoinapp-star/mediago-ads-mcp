@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-22T16:50:00+08:00",
+  "notes": [
+    "This file is the machine-readable compatibility source of truth for MediaGo / AdMaster Ads skills.",
+    "Always verify the resolved versions in compatibility.json before adding or upgrading dependencies."
+  ],
+  "support_window": {
+    "android_sdk": {
+      "latest_verified": "2.0.38",
+      "minimum_recommended": "2.0.20",
+      "min_sdk_version": 19,
+      "compile_sdk_version": 34,
+      "target_sdk_version": 34,
+      "java_version": "1.8"
+    },
+    "unity_android": {
+      "latest_verified_sdk": "2.0.38",
+      "minimum_unity_version": "2021.3 LTS",
+      "verified_tuanjie_version": "2022.3.62t12 (1.10.0)",
+      "min_sdk_version": 23,
+      "target_sdk_version": 34
+    }
+  },
+  "entries": [
+    {
+      "platform": "android",
+      "route": "direct",
+      "mediation": "none",
+      "sdk_artifact": "cc.admaster.android:sdk",
+      "sdk_version": "2.0.38",
+      "supported_range": ">=2.0.20 <=2.0.38",
+      "min_sdk": 19,
+      "compile_sdk": 34,
+      "java_version": "1.8",
+      "verification_level": "release_verified",
+      "known_issues": [
+        "SplashAd.load(context, adUnitId, request, callback) requires calling ad.show(container) after onAdLoaded; use SplashAd.loadAndShow(...) only for one-step splash display."
+      ],
+      "source_refs": [
+        "xadsdk_lib_sdk/build.gradle",
+        "xadsdk_lib_sdk/src/main/java/cc/admaster/android/proxy/api/AdMaster.java"
+      ]
+    },
+    {
+      "platform": "android",
+      "route": "mediation",
+      "mediation": "admob",
+      "sdk_artifact": "cc.admaster.android:sdk",
+      "sdk_version": "2.0.38",
+      "adapter_artifact": "cc.admaster.android:adapter",
+      "adapter_version": "1.0.0",
+      "host_mediation_artifact": "com.google.android.gms:play-services-ads:23.0.0",
+      "adapter_entry_class": "com.google.ads.mediation.admaster.AdMasterMediationAdapter",
+      "server_parameter_keys": ["app_id", "ad_unit_id"],
+      "verification_level": "release_verified",
+      "known_issues": [
+        "AdMob Custom Event server parameter JSON uses 'ad_unit_id' (not 'placement_id') alongside 'app_id'."
+      ],
+      "source_refs": [
+        "xadsdk_lib_sdk_adapter/build.gradle",
+        "xadsdk_lib_sdk_adapter/src/main/java/com/google/ads/mediation/admaster/AdMasterConstants.java"
+      ]
+    },
+    {
+      "platform": "android",
+      "route": "mediation",
+      "mediation": "max",
+      "sdk_artifact": "cc.admaster.android:sdk",
+      "sdk_version": "2.0.38",
+      "adapter_artifact": "cc.admaster.android:max-adapter",
+      "adapter_version": "1.0.1",
+      "host_mediation_artifact": "com.applovin:applovin-sdk:13.0.1",
+      "adapter_entry_class": "cc.admaster.android.max.adapter.AdMasterMaxMediationAdapter",
+      "server_parameter_keys": ["app_id", "placement_id"],
+      "verification_level": "release_verified",
+      "known_issues": [],
+      "source_refs": [
+        "xadsdk_lib_max_adapter/build.gradle",
+        "xadsdk_lib_max_adapter/src/main/java/cc/admaster/android/max/adapter/AdMasterMaxConstants.java"
+      ]
+    },
+    {
+      "platform": "android",
+      "route": "mediation",
+      "mediation": "tradplus",
+      "sdk_artifact": "cc.admaster.android:sdk",
+      "sdk_version": "2.0.38",
+      "adapter_artifact": "cc.admaster.android:tradplus-adapter",
+      "adapter_version": "0.0.6",
+      "host_mediation_artifact": "com.tradplusad:tradplus:15.7.0.1",
+      "adapter_classes": {
+        "rewarded": "cc.admaster.android.tradplus.adapter.AdMasterTPRewardedAdAdapter",
+        "interstitial": "cc.admaster.android.tradplus.adapter.AdMasterTPInterstitialAdapter",
+        "splash": "cc.admaster.android.tradplus.adapter.AdMasterTPSplashAdapter",
+        "banner": "cc.admaster.android.tradplus.adapter.AdMasterTPBannerAdapter",
+        "native": "cc.admaster.android.tradplus.adapter.AdMasterTPNativeAdAdapter"
+      },
+      "server_parameter_keys": ["app_id", "placement_id"],
+      "verification_level": "release_verified",
+      "known_issues": [],
+      "source_refs": [
+        "xadsdk_lib_tradplus_adapter/build.gradle",
+        "xadsdk_lib_tradplus_adapter/src/main/java/cc/admaster/android/tradplus/adapter/AdMasterTPConstants.java"
+      ]
+    },
+    {
+      "platform": "android",
+      "route": "mediation",
+      "mediation": "topon-international",
+      "sdk_artifact": "cc.admaster.android:sdk",
+      "sdk_version": "2.0.38",
+      "adapter_artifact": "cc.admaster.android:topon-adapter",
+      "adapter_version": "0.0.4",
+      "host_mediation_artifact": "com.thinkup.sdk:core-tpn:6.5.36",
+      "adapter_classes": {
+        "rewarded": "cc.admaster.android.topon.adapter.AdMasterTopOnRewardedAdapter",
+        "interstitial": "cc.admaster.android.topon.adapter.AdMasterTopOnInterstitialAdapter",
+        "splash": "cc.admaster.android.topon.adapter.AdMasterTopOnSplashAdapter",
+        "banner": "cc.admaster.android.topon.adapter.AdMasterTopOnBannerAdapter",
+        "native": "cc.admaster.android.topon.adapter.AdMasterTopOnNativeAdapter"
+      },
+      "server_parameter_keys": ["app_id", "placement_id"],
+      "verification_level": "release_verified",
+      "known_issues": [
+        "Only use cc.admaster.android:topon-adapter when the host project uses ThinkUp overseas TopOn SDK (com.thinkup.sdk:*)."
+      ],
+      "source_refs": [
+        "xadsdk_lib_topon_adapter/build.gradle",
+        "xadsdk_lib_topon_adapter/src/main/java/cc/admaster/android/topon/adapter/AdMasterTopOnConstants.java"
+      ]
+    },
+    {
+      "platform": "android",
+      "route": "mediation",
+      "mediation": "topon-legacy",
+      "sdk_artifact": "cc.admaster.android:sdk",
+      "sdk_version": "2.0.38",
+      "adapter_artifact": "cc.admaster.android:topon-secmtp-adapter",
+      "adapter_version": "0.0.3",
+      "host_mediation_artifact": "com.anythink.sdk:core-tpn:6.5.10",
+      "adapter_classes": {
+        "rewarded": "cc.admaster.android.topon.secmtp.adapter.AdMasterSecmtpRewardedAdapter",
+        "interstitial": "cc.admaster.android.topon.secmtp.adapter.AdMasterSecmtpInterstitialAdapter",
+        "splash": "cc.admaster.android.topon.secmtp.adapter.AdMasterSecmtpSplashAdapter",
+        "banner": "cc.admaster.android.topon.secmtp.adapter.AdMasterSecmtpBannerAdapter",
+        "native": "cc.admaster.android.topon.secmtp.adapter.AdMasterSecmtpNativeAdapter"
+      },
+      "server_parameter_keys": ["app_id", "placement_id"],
+      "verification_level": "release_verified",
+      "known_issues": [
+        "Only use cc.admaster.android:topon-secmtp-adapter when the host project uses legacy AnyThink TopOn SDK (com.anythink.sdk:*)."
+      ],
+      "source_refs": [
+        "xadsdk_lib_topon_secmtp_adapter/build.gradle",
+        "xadsdk_lib_topon_secmtp_adapter/src/main/java/cc/admaster/android/topon/secmtp/adapter/AdMasterSecmtpConstants.java"
+      ]
+    }
+  ]
+}
