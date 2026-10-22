@@ -100,7 +100,7 @@ import android.app.Application
 import android.util.Log
 import cc.admaster.android.proxy.api.AdMaster
 import cc.admaster.android.proxy.api.AdMasterSetting
-import cc.admaster.android.proxy.api.InitCallback
+import cc.admaster.android.proxy.api.MobadsPermissionSettings
 
 class MyApplication : Application() {
     override fun onCreate() {
@@ -109,10 +109,14 @@ class MyApplication : Application() {
         if (BuildConfig.DEBUG) {
             AdMasterSetting.getInstance().setDebugLogEnable(true)
         }
+        // 可选：若处于 CCPA 拒绝出售/COPPA 儿童保护模式，开启限制个性化广告
+        // AdMasterSetting.getInstance().setLimitPersonalAds(true)
+        // MobadsPermissionSettings.setLimitPersonalAds(true)
+
         // 2. 初始化 SDK（必须在 onInitialized 回调触发后再发起首次广告 load）
-        AdMaster.initialize(this, "${appId}", object : InitCallback {
+        AdMaster.initialize(this, "${appId}", object : AdMaster.InitCallback {
             override fun onInitialized() {
-                Log.d("Ads", "AdMaster initialized (${bidding_mode})")
+                Log.d("Ads", "AdMaster initialized, version=" + AdMaster.getSDKVersion())
                 // TODO: 在此处启动核心广告位预加载 (Preload)
             }
 
@@ -132,7 +136,7 @@ public sealed class AdMasterInitBridge : MonoBehaviour
 
     private sealed class InitCallbackProxy : AndroidJavaProxy
     {
-        public InitCallbackProxy() : base("cc.admaster.android.proxy.api.InitCallback") { }
+        public InitCallbackProxy() : base("cc.admaster.android.proxy.api.AdMaster$InitCallback") { }
 
         // 注意：AndroidJavaProxy 回调运行在 Android 线程，需通过 UnityMainThreadDispatcher 切回主线程触发预加载
         public void onInitialized()
@@ -153,7 +157,7 @@ public sealed class AdMasterInitBridge : MonoBehaviour
         using var appContext = activity.Call<AndroidJavaObject>("getApplicationContext");
         using var settingClass = new AndroidJavaClass("cc.admaster.android.proxy.api.AdMasterSetting");
         using var setting = settingClass.CallStatic<AndroidJavaObject>("getInstance");
-        setting.Call("setDebugLogEnable", isDebug);
+        setting.Call<AndroidJavaObject>("setDebugLogEnable", isDebug);
 
         using var adMasterClass = new AndroidJavaClass("cc.admaster.android.proxy.api.AdMaster");
         adMasterClass.CallStatic("initialize", appContext, AppId, new InitCallbackProxy());
@@ -165,7 +169,7 @@ import android.app.Application;
 import android.util.Log;
 import cc.admaster.android.proxy.api.AdMaster;
 import cc.admaster.android.proxy.api.AdMasterSetting;
-import cc.admaster.android.proxy.api.InitCallback;
+import cc.admaster.android.proxy.api.MobadsPermissionSettings;
 
 public class MyApplication extends Application {
     @Override
@@ -175,11 +179,15 @@ public class MyApplication extends Application {
         if (BuildConfig.DEBUG) {
             AdMasterSetting.getInstance().setDebugLogEnable(true);
         }
+        // 可选：若处于 CCPA 拒绝出售/COPPA 儿童保护模式，开启限制个性化广告
+        // AdMasterSetting.getInstance().setLimitPersonalAds(true);
+        // MobadsPermissionSettings.setLimitPersonalAds(true);
+
         // 2. 初始化 SDK（严禁在 onInitialized 触发前直接同步调用 load，否则必报 1030003）
-        AdMaster.initialize(this, "${appId}", new InitCallback() {
+        AdMaster.initialize(this, "${appId}", new AdMaster.InitCallback() {
             @Override
             public void onInitialized() {
-                Log.d("Ads", "AdMaster initialized");
+                Log.d("Ads", "AdMaster initialized, version=" + AdMaster.getSDKVersion());
                 // TODO: 在此处启动激励/插屏预加载
             }
 
@@ -200,10 +208,10 @@ public class MyApplication extends Application {
       imports: [
         'cc.admaster.android.proxy.api.AdMaster',
         'cc.admaster.android.proxy.api.AdMasterSetting',
-        'cc.admaster.android.proxy.api.InitCallback'
+        'cc.admaster.android.proxy.api.MobadsPermissionSettings'
       ],
       guardrails: [
-        '必须在 InitCallback.onInitialized() 触发后才发起首次广告 load(...)，否则会触发 1030003 (ERROR_NOT_INITIALIZED)。',
+        '必须在 AdMaster.InitCallback.onInitialized() 触发后才发起首次广告 load(...)，否则会触发 1030003 (ERROR_NOT_INITIALIZED)。',
         'appId 必须为 32 位小写十六进制字符串；若使用多进程，展示广告的子进程需配置 AdActivityController。'
       ],
       code
