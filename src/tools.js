@@ -221,8 +221,7 @@ dependencies {
       coordinate: coreArtifact,
       sdk_artifact: directEntry.sdk_artifact,
       latest_verified: directEntry.sdk_version,
-      supported_range: directEntry.supported_range,
-      source_refs: directEntry.source_refs
+      supported_range: directEntry.supported_range
     },
     support_window: compat.support_window,
     selected_adapters: selectedAdapters.map((a) => ({
@@ -357,7 +356,6 @@ function handleGetMediationAdapterConfig(args = {}) {
     adapter_classes: adapterClasses,
     dashboard_server_parameter_json: JSON.stringify(serverParameters, null, 2),
     test_server_parameters_by_format: allPlacementServerParameters,
-    source_refs: adapterInfo.source_refs,
     critical_notes: criticalNotes
   };
 }
@@ -478,7 +476,7 @@ function handleDiagnoseErrorCode(args = {}) {
 
 /**
  * 解析单行 [Funnel] / [FunnelWithoutInstance] 日志
- * 格式参考 FunnelLogFormat.java:
+ * 标准漏斗日志格式:
  * [Funnel] lifecycle_stage [READY#4] [req=a1b2c3d4] [kind=rewarded_video] | cost_ms=312 elapsed_ms=850 cache_source=network
  */
 function parseFunnelLine(line) {

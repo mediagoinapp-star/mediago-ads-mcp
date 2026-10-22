@@ -4,7 +4,7 @@ const { TEST_CREDENTIALS } = require('./data');
 
 /**
  * 构建 Client Bidding (IBiddingAd) 竞价回传与价格读取代码段
- * 严格对齐 cc.admaster.android.proxy.api.IBiddingAd 与 BiddingUtils 强校验规则
+ * 严格对齐 cc.admaster.android.proxy.api.IBiddingAd 参数校验规则
  */
 function buildBiddingSnippet(language, adVarName = 'ad') {
   if (language === 'kotlin') {
@@ -60,7 +60,7 @@ using (var ecpmInt = new AndroidJavaObject("java.lang.Integer", Mathf.Max(1, sec
 String ecpmStr = ${adVarName}.getResponseInfo().getEcpmLevel();
 
 // 2A. 竞胜通知 notifyWin（必须在校验 !ad.isExpired() 且调用 show 之前上报）
-// 强校验规则："ecpm" 必须为 > 0 的正整数（严禁带小数点或传 <= 0，否则 BiddingUtils 校验失败）
+// 强校验规则："ecpm" 必须为 > 0 的正整数（严禁带小数点或传 <= 0，否则参数校验失败）
 Map<String, Object> secondInfo = new HashMap<>();
 secondInfo.put("ecpm", Math.max(1, secondPriceCents));
 secondInfo.put("min_to_win", Math.max(1, secondPriceCents + 1));
@@ -138,7 +138,7 @@ public sealed class AdMasterInitBridge : MonoBehaviour
     {
         public InitCallbackProxy() : base("cc.admaster.android.proxy.api.AdMaster$InitCallback") { }
 
-        // 注意：AndroidJavaProxy 回调运行在 Android 线程，需通过 UnityMainThreadDispatcher 切回主线程触发预加载
+        // 注意：AndroidJavaProxy 回调运行在 Android 线程，需切回 Unity 主线程后再触发预加载
         public void onInitialized()
         {
             Debug.Log("[Ads] AdMaster.onInitialized -> trigger preload on Unity main thread");

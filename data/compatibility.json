@@ -36,10 +36,6 @@
       "verification_level": "release_verified",
       "known_issues": [
         "SplashAd.load(context, adUnitId, request, callback) requires calling ad.show(container) after onAdLoaded; use SplashAd.loadAndShow(...) only for one-step splash display."
-      ],
-      "source_refs": [
-        "xadsdk_lib_sdk/build.gradle",
-        "xadsdk_lib_sdk/src/main/java/cc/admaster/android/proxy/api/AdMaster.java"
       ]
     },
     {
@@ -56,10 +52,6 @@
       "verification_level": "release_verified",
       "known_issues": [
         "AdMob Custom Event server parameter JSON uses 'ad_unit_id' (not 'placement_id') alongside 'app_id'."
-      ],
-      "source_refs": [
-        "xadsdk_lib_sdk_adapter/build.gradle",
-        "xadsdk_lib_sdk_adapter/src/main/java/com/google/ads/mediation/admaster/AdMasterConstants.java"
       ]
     },
     {
@@ -74,11 +66,7 @@
       "adapter_entry_class": "cc.admaster.android.max.adapter.AdMasterMaxMediationAdapter",
       "server_parameter_keys": ["app_id", "placement_id"],
       "verification_level": "release_verified",
-      "known_issues": [],
-      "source_refs": [
-        "xadsdk_lib_max_adapter/build.gradle",
-        "xadsdk_lib_max_adapter/src/main/java/cc/admaster/android/max/adapter/AdMasterMaxConstants.java"
-      ]
+      "known_issues": []
     },
     {
       "platform": "android",
@@ -98,11 +86,7 @@
       },
       "server_parameter_keys": ["app_id", "placement_id"],
       "verification_level": "release_verified",
-      "known_issues": [],
-      "source_refs": [
-        "xadsdk_lib_tradplus_adapter/build.gradle",
-        "xadsdk_lib_tradplus_adapter/src/main/java/cc/admaster/android/tradplus/adapter/AdMasterTPConstants.java"
-      ]
+      "known_issues": []
     },
     {
       "platform": "android",
@@ -124,10 +108,6 @@
       "verification_level": "release_verified",
       "known_issues": [
         "Only use cc.admaster.android:topon-adapter when the host project uses ThinkUp overseas TopOn SDK (com.thinkup.sdk:*)."
-      ],
-      "source_refs": [
-        "xadsdk_lib_topon_adapter/build.gradle",
-        "xadsdk_lib_topon_adapter/src/main/java/cc/admaster/android/topon/adapter/AdMasterTopOnConstants.java"
       ]
     },
     {
@@ -150,10 +130,6 @@
       "verification_level": "release_verified",
       "known_issues": [
         "Only use cc.admaster.android:topon-secmtp-adapter when the host project uses legacy AnyThink TopOn SDK (com.anythink.sdk:*)."
-      ],
-      "source_refs": [
-        "xadsdk_lib_topon_secmtp_adapter/build.gradle",
-        "xadsdk_lib_topon_secmtp_adapter/src/main/java/cc/admaster/android/topon/secmtp/adapter/AdMasterSecmtpConstants.java"
       ]
     }
   ]
